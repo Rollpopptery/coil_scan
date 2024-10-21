@@ -4,10 +4,10 @@
 
 // uSec Pulse Width
 //
-//const int PULSE_WIDTH = 75;
+const int PULSE_WIDTH = 75;
 
 // coil 1364 uSec
-const int PULSE_WIDTH = 200;
+//const int PULSE_WIDTH = 200;
 
 // how often the pulses occur in uSec
 //  200 Hz = 5000uSec
