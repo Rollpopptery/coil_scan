@@ -142,8 +142,7 @@ void loop() {
   {
     sampleReady = false;  
     
-    // compensate_audio_for_pulse() ;  // compesnate for ~ 100Sec pulse
-   
+      
     // --running averages-- happens quckly and often (i.e at 500 Hz)
     // ! must be efficient !
     // replace the old value in the buffer with the new value
@@ -159,6 +158,8 @@ void loop() {
 
     }
 
+    // TODO: This is not used probably not necessary
+    //
 
     oldSample = sample_last[averageCount];
     tempF = 0;          
@@ -189,7 +190,7 @@ void loop() {
 
       for(index = 0 ; index < TIME_POINTS; index++)
       {
-        // re-calculate long averages
+        // re-calculate long averages  TODO: Not used in coil scan
         //          
         tempF = (averages[index] -  longAverages[index]);
         tempF /= LONG_AVERAGE_FACTOR;          
@@ -231,7 +232,7 @@ void loop() {
       
       // SCAN of Coil Pulse
       //
-      if (mode == T)
+      if (mode == T)   // continuous scan mode
       {        
         for(int i = 0; i < TIME_POINTS ; i++ )
         {          
@@ -250,6 +251,23 @@ void loop() {
           scanDelay = 0; 
           Serial.println();         
         }
+      }
+      if (mode == U)   // continuous scan, 50 samples at 3uSec, no interleaving
+      {        
+        for(int i = 0; i < TIME_POINTS ; i++ )
+        {          
+          fullScanData[i] = (averages[i]);
+        }
+        
+        // print out the full scan
+        //
+        for(int i = 0 ; i < TIME_POINTS; i++ )
+        {
+          Serial.print(fullScanData[i]);
+          Serial.print(",");
+        }
+        scanDelay = 0;  // remains at zero
+        Serial.println();                 
       }
       else if (mode == S)
       {        

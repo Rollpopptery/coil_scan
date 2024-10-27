@@ -16,7 +16,7 @@ bool LOCAL_AUDIO = true;            // sound output DAC
 // communications mode (serial port data modes) described in wombat_coms
 //
 
-volatile enum {a, S, C, N, T, s} mode = a;
+volatile enum {a, S, C, N, T, s, U} mode = a;
 
 volatile enum {DEFAULT} targetMode = DEFAULT;
 

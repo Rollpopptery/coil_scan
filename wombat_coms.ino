@@ -2,7 +2,7 @@
 /*
 WOMBAT PI Metal detector
 wombatpi.net
-Modified: 14-Apr-2024
+Modified: 27-Oct-2024
 
 Communication over the serial port 
 Serial rate: 115200
@@ -12,7 +12,9 @@ MS    = Scan  (0 to 149uSec)
 MC    = Compare scan (do another scan and subtract first scan)
 MN    = Normalise  , print out the Compare scan normalised.
 
-MT    = continuous scan
+MT    = continuous scan  , 3 scans interleaved to give 1uSec resolution
+MU    = fast non-interleaved continuous scan, 3uSec resolution
+
 
 */
 
@@ -114,6 +116,12 @@ void checkCommands()
           mode = T;
         }
         break;
+        case('U'):
+        {
+          mode = U;
+        }
+        break;
+
 
 
         default:
